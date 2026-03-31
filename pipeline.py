@@ -141,16 +141,18 @@ def make_serializable(df: pd.DataFrame) -> pd.DataFrame:
 
 def main():
     creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS"])
-    spreadsheet_name = os.environ["SPREADSHEET_NAME"]
+    spreadsheet_id = os.environ["SPREADSHEET_ID"]
 
     creds = Credentials.from_service_account_info(
         creds_dict,
-        scopes=["https://www.googleapis.com/auth/spreadsheets",
-               "https://www.googleapis.com/auth/drive"]
+        scopes=[
+            "https://www.googleapis.com/auth/spreadsheets",
+            "https://www.googleapis.com/auth/drive"
+        ]
     )
     gc = gspread.authorize(creds)
 
-    sh = gc.open(spreadsheet_name)
+    sh = gc.open_by_key(spreadsheet_id)
 
     raw_ws = sh.worksheet("workout_logs_raw")
     dim_ws = sh.worksheet("dim_exercises")
