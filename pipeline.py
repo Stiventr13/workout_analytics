@@ -48,11 +48,9 @@ def build_fact_workout_sets(raw_logs: pd.DataFrame, dim_exercises: pd.DataFrame)
     if "weight_unit" in raw.columns:
         raw["weight_unit"] = standardize_text(raw["weight_unit"]).replace({
             "kgs": "kg",
-            "kilograms": "kg",
-            "kilogram": "kg",
+            "Kg": "kg",
             "lbs": "lb",
-            "pounds": "lb",
-            "pound": "lb"
+            "Lbs": "lb"
         })
     else:
         raw["weight_unit"] = pd.NA
@@ -80,11 +78,9 @@ def build_fact_workout_sets(raw_logs: pd.DataFrame, dim_exercises: pd.DataFrame)
     if "default_unit" in fact.columns:
         fact["default_unit"] = standardize_text(fact["default_unit"]).replace({
             "kgs": "kg",
-            "kilograms": "kg",
-            "kilogram": "kg",
+            "Kg": "kg"
             "lbs": "lb",
-            "pounds": "lb",
-            "pound": "lb"
+            "Lbs": "lb"
         })
         fact["weight_unit"] = fact["weight_unit"].fillna(fact["default_unit"])
 
