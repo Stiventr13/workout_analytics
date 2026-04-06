@@ -78,7 +78,7 @@ def build_fact_workout_sets(raw_logs: pd.DataFrame, dim_exercises: pd.DataFrame)
     if "default_unit" in fact.columns:
         fact["default_unit"] = standardize_text(fact["default_unit"]).replace({
             "kgs": "kg",
-            "Kg": "kg"
+            "Kg": "kg",
             "lbs": "lb",
             "Lbs": "lb"
         })
